@@ -5,11 +5,10 @@ on:
   push:
     branches: 
       - 'main'
-      - 'feat-prometheus-client-container'
 
 jobs:
   push_prometheus:
-    name: Publish Prometheus image
+    name: Publish monitoring images
     runs-on: ubuntu-latest
     
     permissions:

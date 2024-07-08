@@ -3,9 +3,9 @@ global:
   evaluation_interval: 30s # Evaluate rules every 30 seconds.
 
 remote_write:
-  - url: 'some-url'
+  - url: '%{REMOTE_WRITE_URL}'
     authorization:
-      credentials: 'super-secret-credentials'
+      credentials: '%{REMOTE_WRITE_CREDENTIALS}'
     write_relabel_configs:
       - source_labels: [job]
         regex: "charon"
