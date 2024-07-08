@@ -29,8 +29,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
+      # Prometheus      
+      - name: Extract metadata (tags, labels) for Prometheus Docker
+        id: meta-prometheus
         uses: docker/metadata-action@v5
         with:
           images: |
@@ -38,7 +39,6 @@ jobs:
           tags: |
             type=sha,format=short,value=${{ github.sha }}
 
-      # Prometheus      
       - name: Build and push Prometheus
         id: push-prometheus
         uses: docker/build-push-action@v5
@@ -46,8 +46,8 @@ jobs:
           context: .
           push: true
           file: prometheus.Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-prometheus.outputs.tags }}
+          labels: ${{ steps.meta-prometheus.outputs.labels }}
           
       - name: attest-prometheus
         uses: actions/attest-build-provenance@v1
@@ -58,6 +58,15 @@ jobs:
           push-to-registry: true
 
       # Prometheus-Lido
+      - name: Extract metadata (tags, labels) for Prometheus-Lido Docker
+        id: meta-prometheus-lido
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/prometheus-lido
+          tags: |
+            type=sha,format=short,value=${{ github.sha }}
+
       - name: Build and push Prometheus-lido
         id: push-prometheus-lido
         uses: docker/build-push-action@v5
@@ -65,8 +74,8 @@ jobs:
           context: .
           push: true
           file: prometheus-lido.Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-prometheus-lido.outputs.tags }}
+          labels: ${{ steps.meta-prometheus-lido.outputs.labels }}
 
       - name: attest-prometheus-lido  
         uses: actions/attest-build-provenance@v1
@@ -77,6 +86,15 @@ jobs:
           push-to-registry: true
 
       # Grafana
+      - name: Extract metadata (tags, labels) for Grafana Docker
+        id: meta-grafana
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/prometheus
+          tags: |
+            type=sha,format=short,value=${{ github.sha }}
+  
       - name: Build and push Grafana
         id: push-grafana
         uses: docker/build-push-action@v5
@@ -84,8 +102,8 @@ jobs:
           context: .
           push: true
           file: grafana.Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-grafana.outputs.tags }}
+          labels: ${{ steps.meta-grafana.outputs.labels }}
 
       - name: attest  
         uses: actions/attest-build-provenance@v1
