@@ -3,7 +3,7 @@ name: Publish images
 
 on:
   push:
-    branches: 
+    branches:
       - 'main'
 
 jobs:
@@ -54,34 +54,6 @@ jobs:
         with:
           subject-name: ghcr.io/${{ github.repository }}/prometheus
           subject-digest: ${{ steps.push-prometheus.outputs.digest }}
-          push-to-registry: true
-
-      # Prometheus-Lido
-      - name: Extract metadata (tags, labels) for Prometheus-Lido Docker
-        id: meta-prometheus-lido
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}/prometheus-lido
-          tags: |
-            type=sha,format=short,value=${{ github.sha }}
-
-      - name: Build and push Prometheus-lido
-        id: push-prometheus-lido
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          file: prometheus-lido.Dockerfile
-          tags: ${{ steps.meta-prometheus-lido.outputs.tags }}
-          labels: ${{ steps.meta-prometheus-lido.outputs.labels }}
-
-      - name: attest-prometheus-lido  
-        uses: actions/attest-build-provenance@v1
-        id: attest-prometheus-lido
-        with:
-          subject-name: ghcr.io/${{ github.repository }}/prometheus-lido
-          subject-digest: ${{ steps.push-prometheus-lido.outputs.digest }}
           push-to-registry: true
 
       # Grafana
