@@ -9,4 +9,5 @@ for i in $(env); do
         sed -i "s@$KEY@$VALUE@g" /etc/prometheus/prometheus.yml
     fi
 done
+
 exec /bin/prometheus "$@"
