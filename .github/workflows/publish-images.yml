@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - 'main'
-
+      - 'feat-prometheus-client-container'
 jobs:
   push_prometheus:
     name: Publish monitoring images
