@@ -1,7 +1,3 @@
-
-# This is a complete configuration to deploy Loki backed by the filesystem.
-# The index will be shipped to the storage via tsdb-shipper.
-
 auth_enabled: false
 
 server:
@@ -13,7 +9,19 @@ common:
     kvstore:
       store: inmemory
   replication_factor: 1
-  path_prefix: /tmp/loki
+  path_prefix: /loki
+
+# This is intentionally left very large since we have lots of space to spare for logs. 
+compactor:
+  working_directory: /loki/retention
+  compaction_interval: 24h
+  retention_enabled: true
+  retention_delete_delay: 6h
+  retention_delete_worker_count: 150
+  delete_request_store: gcs
+
+limits_config:
+  retention_period: 30d
 
 schema_config:
   configs:
@@ -27,4 +35,4 @@ schema_config:
 
 storage_config:
   filesystem:
-    directory: /tmp/loki/chunks
+    directory: /loki/chunks

@@ -6,14 +6,28 @@ deleteDatasources:
   - name: Loki
     orgId: 1
 
+# Custom IDs for Prometheus & Loki
 datasources:
   - name: Prometheus
     type: prometheus
     uid: prometheus
     orgId: 1
-    url: http://prometheus:9090
     basicAuth: false
     isDefault: true
+    jsonData:
+      graphiteVersion: "1.1"
+      tlsAuth: false
+      tlsAuthWithCACert: false
+    version: 1
+    editable: true
+
+datasources:
+  - name: Loki
+    type: loki
+    uid: loki
+    orgId: 1
+    basicAuth: false
+    isDefault: false
     jsonData:
       graphiteVersion: "1.1"
       tlsAuth: false
