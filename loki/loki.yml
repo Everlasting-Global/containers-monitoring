@@ -18,7 +18,7 @@ compactor:
   retention_enabled: true
   retention_delete_delay: 6h
   retention_delete_worker_count: 150
-  delete_request_store: gcs
+  delete_request_store: tsdb
 
 limits_config:
   retention_period: 30d
