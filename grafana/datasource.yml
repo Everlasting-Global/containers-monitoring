@@ -21,7 +21,6 @@ datasources:
     version: 1
     editable: true
 
-datasources:
   - name: Loki
     type: loki
     uid: loki
