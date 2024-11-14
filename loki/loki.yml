@@ -2,6 +2,8 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
+  http_server_read_timeout: 10m
+  http_server_write_timeout: 10m
 
 common:
   ring:
@@ -20,8 +22,10 @@ compactor:
   retention_delete_worker_count: 150
   delete_request_store: filesystem
 
+
 limits_config:
   retention_period: 30d
+  max_global_streams_per_user: 100000 
 
 schema_config:
   configs:
