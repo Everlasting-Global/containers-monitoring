@@ -7,6 +7,7 @@ deleteDatasources:
     orgId: 1
 
 # Custom IDs for Prometheus & Loki
+# TODO change to dynamic IP - Currently Mac Mini IP
 datasources:
   - name: Prometheus
     type: prometheus
@@ -14,6 +15,7 @@ datasources:
     orgId: 1
     basicAuth: false
     isDefault: true
+    url: http://10.243.230.94:9090
     jsonData:
       graphiteVersion: "1.1"
       tlsAuth: false
@@ -27,6 +29,7 @@ datasources:
     orgId: 1
     basicAuth: false
     isDefault: false
+    url: http://10.243.230.94:3100
     jsonData:
       graphiteVersion: "1.1"
       tlsAuth: false
