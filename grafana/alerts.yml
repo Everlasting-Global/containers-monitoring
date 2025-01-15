@@ -662,6 +662,8 @@ groups:
             receiver: telegram-grafana-provisioned
         - uid: ee8dd3f8-bf16-4d1e-b644-ba01bb8c273b
           title: Peer ping latency (400ms threshold)
+          labels:
+            cluster_hash: '{{$labels.peer}}'
           condition: C
           data:
             - refId: A
