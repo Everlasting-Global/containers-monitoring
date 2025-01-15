@@ -195,7 +195,7 @@ jobs:
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-name: ghcr.io/${{ github.repository }}/loki
+          subject-name: ghcr.io/${{ github.repository }}/namada-exporter
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
           
