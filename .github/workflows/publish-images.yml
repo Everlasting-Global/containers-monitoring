@@ -190,6 +190,8 @@ jobs:
           file: namada-exporter.Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+        env:
+          NAMADA_EXPORTER_TAG: v0.1.0
 
       - name: attest  
         uses: actions/attest-build-provenance@v1

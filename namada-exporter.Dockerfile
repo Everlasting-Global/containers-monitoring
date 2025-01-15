@@ -16,8 +16,9 @@ RUN rustup target add wasm32-unknown-unknown
 
 # Set working directory
 WORKDIR /app
+ARG NAMADA_EXPORTER_TAG
 # Clone repository
-RUN git clone https://github.com/MELLIFERA-Labs/namada-exporter.git .
+RUN git clone -b $NAMADA_EXPORTER_TAG https://github.com/MELLIFERA-Labs/namada-exporter.git .
 
 # Install and build shared dependencies
 WORKDIR /app/shared
